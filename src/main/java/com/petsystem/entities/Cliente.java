@@ -1,5 +1,10 @@
 package com.petsystem.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="clientes")
 public class Cliente {
 
 	private Long id;
@@ -19,6 +24,16 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
 	public String getNome() {
 		return nome;
 	}
@@ -64,6 +79,9 @@ public class Cliente {
 			return false;
 		return true;
 	}
+
+
+
 
 
 

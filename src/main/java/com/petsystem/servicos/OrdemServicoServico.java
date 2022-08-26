@@ -1,5 +1,11 @@
 package com.petsystem.servicos;
 
-public class OrdemServicoServico {
+import java.util.Optional;
 
+import com.petsystem.entities.OrdemServico;
+
+public interface OrdemServicoServico {
+
+	OrdemServico save(OrdemServico os);
+	
 }

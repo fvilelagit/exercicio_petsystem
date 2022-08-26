@@ -1,5 +1,11 @@
 package com.petsystem.servicos;
 
-public class AnimalServico {
+import com.petsystem.entities.Animal;
 
+public interface AnimalServico {
+
+	
+	Animal save (Animal animal);
+	
+	
 }

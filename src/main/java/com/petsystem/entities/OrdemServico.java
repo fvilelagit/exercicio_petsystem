@@ -2,6 +2,11 @@ package com.petsystem.entities;
 
 import java.time.Instant;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ordem_de_servicos")
 public class OrdemServico {
 
 	private Long id;
