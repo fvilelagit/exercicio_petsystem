@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface ClienteRepositorio extends JpaRepository <Cliente, Long> {
 
+	
+	
 }
