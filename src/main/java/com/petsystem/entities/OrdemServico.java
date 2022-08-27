@@ -2,24 +2,25 @@ package com.petsystem.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
-@Table(name = "ordem_de_servicos")
+@Table(name = "ordemDeServico")
 public class OrdemServico implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,20 +38,24 @@ public class OrdemServico implements Serializable {
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	
-	//@JsonIgnore
-	@ManyToMany(mappedBy = "animais")
-	private Set <Animal> animais = new HashSet<>();
+//	@ManyToMany
+//	@JoinTable(name ="ordemDeServicos_animais", 
+//	joinColumns = @JoinColumn(name="ordemDeServicos_id"),
+//	inverseJoinColumns = @JoinColumn(name="animais_id"))
+//	private Set <Animal> animais = new HashSet<>();
 
+	@OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("ordemServico")
+	private List<OrdemAnimal> ordemAnimal;
 	
-	public OrdemServico(Long id, Double valor, Instant hora_entrada, Instant hora_saida, Cliente cliente,
-			Set<Animal> animais) {
+	public OrdemServico(Long id, Double valor, Instant hora_entrada, Instant hora_saida, Cliente cliente) {
 		super();
 		this.id = id;
 		this.valor = valor;
 		this.hora_entrada = hora_entrada;
 		this.hora_saida = hora_saida;
 		this.cliente = cliente;
-		this.animais = animais;
+
 	}
 
 	public OrdemServico() {
@@ -66,6 +71,7 @@ public class OrdemServico implements Serializable {
 		this.hora_saida = hora_saida;
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -104,10 +110,6 @@ public class OrdemServico implements Serializable {
 
 	public void setHora_saida(Instant hora_saida) {
 		this.hora_saida = hora_saida;
-	}
-
-	public Set<Animal> getAnimais() {
-		return animais;
 	}
 
 	

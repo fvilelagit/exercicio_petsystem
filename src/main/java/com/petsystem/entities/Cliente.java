@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="clientes")
@@ -28,7 +27,8 @@ public class Cliente implements Serializable{
 	private String nome;
 	private String telefone;
 	
-	@OneToMany(mappedBy = "id.animais")
+	@OneToMany(mappedBy = "id.animal", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("cliente")
 	private Set<Animal> animal = new HashSet<>();	
 	
 	
