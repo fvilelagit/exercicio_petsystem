@@ -1,31 +1,45 @@
 package com.petsystem.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="animais")
-public class Animal {
+public class Animal implements Serializable {
 
-	
+	private static final long serialVersionUID = 1L;
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private Integer idade;
 	private Double peso;
 	
-	private Cliente id_cliente;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_cliente", referencedColumnName = "id")
+	private Cliente cliente;
+	
+	
 	
 	public Animal() {
 		super();
 	}
 
-	public Animal(Long id, String nome, Integer idade, Double peso, Cliente id_cliente) {
+	public Animal(Long id, String nome, Integer idade, Double peso, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.idade = idade;
 		this.peso = peso;
-		this.id_cliente = id_cliente;
+		this.cliente = cliente;
 	}
 
 	public Long getId() {
@@ -60,19 +74,13 @@ public class Animal {
 		this.peso = peso;
 	}
 
-	public Cliente getId_cliente() {
-		return id_cliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setId_cliente(Cliente id_cliente) {
-		this.id_cliente = id_cliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	
-
-	
-	
-	
-	
 	
 }
